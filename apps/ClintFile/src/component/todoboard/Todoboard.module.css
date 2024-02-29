@@ -7,9 +7,9 @@
 }
 
 .Backlocks {
-    width: 200px;
+    /* width: 200px; */
     height: 450px;
-    background-color: gray;
+    /* background-color: gray; */
     border: 1px solid black;
     overflow-y: scroll;
 }
