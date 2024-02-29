@@ -1,0 +1,11 @@
+.footer {
+  margin-top: 12px;
+  width: 300px;
+}
+
+.chip {
+  background-color: #CF3636;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 10px;
+}

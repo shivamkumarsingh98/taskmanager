@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './TaskCard.module.css';
 import { IoIosArrowUp,IoIosArrowDown  } from "react-icons/io";
+import Chip from '../../Buttons/Chip';
 
 const TaskCard = () => {
   const [tasks, setTasks] = useState([
@@ -49,7 +50,7 @@ const TaskCard = () => {
           </div>
         )}
         <div className={styles.footer}>
-          <span className={styles.chip}>10 Feb</span>
+         <Chip/>
         </div>
       </div>
     </>
