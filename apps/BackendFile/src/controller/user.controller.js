@@ -18,33 +18,36 @@ const register = async (req, res) => {
 
     const user = await User.register(name, email, password);
     const token = await Token.generateToken(user.id)
+    const options = {
+        httpOnly: true,
+        secure: true,
+    };
+    res.cookie("cookies", token, options);
     if (user) res.status(200).json({ message: "Success", user, token });
 }
 
 const login = async (req, res) => {
-    console.log(req.body);
-
     const { email, password } = req.body;
 
-    try {
-        const existingUser = await User.findOne({ email });
+    // try {
+    //     const existingUser = await User.findOne({ email });
 
-        if (!existingUser) {
-            return res.status(401).json({ message: "User not found" });
-        }
+    //     if (!existingUser) {
+    //         return res.status(401).json({ message: "User not found" });
+    //     }
 
-        const matchPassword = await bcrypt.compare(password, existingUser.password);
-        if (!matchPassword) {
-            return res.status(400).json({ message: "Invalid password" });
-        }
+    //     const matchPassword = await bcrypt.compare(password, existingUser.password);
+    //     if (!matchPassword) {
+    //         return res.status(400).json({ message: "Invalid password" });
+    //     }
 
-        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, SecretKey);
-        res.status(200).json({ message: "Login successful", token });
+    //     const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, SecretKey);
+    //     res.status(200).json({ message: "Login successful", token });
 
-    } catch (error) {
-        console.error("Error logging in user:", error);
-        res.status(500).json({ message: "Internal server error" });
-    }
+    // } catch (error) {
+    //     console.error("Error logging in user:", error);
+    //     res.status(500).json({ message: "Internal server error" });
+    // }
 }
 
 module.exports = { register, login };
