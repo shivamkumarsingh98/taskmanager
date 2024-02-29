@@ -5,18 +5,18 @@ import Navebar from '../navebar/Navebar'
 function Analytics() {
     return (
         <div className={style.body}>
-            <div >
-              <Navebar/>
+            <div>
+                <Navebar />
             </div>
-            <div className={style.mainsection}>
+            <div className={style.mainSection}>
                 <div className={style.header}>
                     <h3>Analytics</h3>
                 </div>
                 <div className={style.board}>
-                    <div className={style.sectionone}>
+                    <div className={style.sectionOne}>
                         <ul>
                             <div className={style.list}>
-                                <li>Backlock Task</li><span>0</span>
+                                <li>Backlog Task</li><span>0</span>
                             </div>
                             <div className={style.list}>
                                 <li>Todo Task</li><span>0</span>
@@ -29,7 +29,7 @@ function Analytics() {
                             </div>
                         </ul>
                     </div>
-                    <div className={style.sectiontwo}>
+                    <div className={style.sectionTwo}>
                         <ul>
                             <div className={style.list}>
                                 <li>Low Priority</li><span>0</span>
