@@ -18,14 +18,17 @@ const addTodo = async (req, res) => {
     if (!user) throw new ApiError(401, "Unauthorized", "You are not authorized!");
     req.body.owner = user.id;
     const todoData = { title: title, checkList: checkList, dueDate: dueDate, owner: ownerId, priority: priority, id: id }
-    const todoId = await Todo.addTodo(todoData);
+    const todoId = await Todo.addOrUpdate(todoData);
     await user.todo.push(todoId);
     user.save();
     res.send("Hello");
 }
 
-const updateTodo = async (req, res) => {
-
+const deleteTodo = async (req, res) => {
+    const { ownerId, id } = req.body;
+    console.log(ownerId, id)
+    const deletedTodo = await Todo.deleteDoto({ ownerId, id });
+    res.status(200).json({ deletedTodo });
 }
 
-module.exports = { getData, addTodo }
+module.exports = { getData, addTodo, deleteTodo }

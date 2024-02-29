@@ -19,11 +19,16 @@ class TodoDbFunction {
         return todoData;
     }
 
-    async addTodo(todoData) {
+    async addOrUpdate(todoData) {
         const { id, ...data } = todoData;
         console.log(id)
         const todo = id ? await Todo.findByIdAndUpdate(id, data, { new: true }) : await Todo.create(data);
         return todo.id;
+    }
+
+    async deleteTodo({ ownerId, id }) {
+        const deletedTodo = await Todo.findOneAndDelete({ _id: id, owner: ownerId })
+        return deletedTodo;
     }
 }
 
