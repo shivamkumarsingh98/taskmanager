@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import styles from './TaskCard.module.css';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 import Chip from '../../Buttons/Chip';
 
-const TaskCard = ({priority}) => {
+const TaskCard = ({priority,setShowList,showList}) => {
     const [showModal, setShowModal] = useState(false);
 
   const handleIconClick = () => {
@@ -17,7 +18,7 @@ const TaskCard = ({priority}) => {
     { id: 3, title: 'Watch a movie', checked: false },
     { id: 4, title: 'Read emails', checked: false }
   ]);
-  const [showList, setShowList] = useState(false);
+ 
 
   const handleCheckboxChange = (taskId) => {
     const updatedTasks = tasks.map(task => {
