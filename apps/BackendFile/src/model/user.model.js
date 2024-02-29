@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 const bcrypt = require("bcrypt")
 
-const Schema = mongoose.Schema
+const todoShcema = new mongoose.Schema({
+    todoId: mongoose.Schema.ObjectId
+})
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -15,7 +17,10 @@ const userSchema = new Schema({
     password: {
         type: String,
         require: true
-    }
+    },
+    todo: [mongoose.Schema.ObjectId]
+}, {
+    timestamps: true
 })
 
 userSchema.pre("save", async function (next) {

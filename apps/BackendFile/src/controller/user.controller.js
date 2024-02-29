@@ -1,6 +1,3 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const SecretKey = "newuser";
 const UserServices = require('../services/user.services')
 const TokenServices = require("../services/token.services");
 const ApiError = require('../utils/apiError.utils');
@@ -17,6 +14,7 @@ const register = async (req, res) => {
     if (password === "") throw new Error(401, "Emial is required!", "Please provide password!")
 
     const user = await User.register(name, email, password);
+    user.password = null;
     const token = await Token.generateToken(user.id)
     const options = {
         httpOnly: true,
@@ -29,33 +27,14 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.login(email, password);
+    user.password = null;
     const token = await Token.generateToken(user.id);
     const options = {
         httpOnly: true,
         secure: true,
     };
     res.cookie("cookies", token, options);
-    res.status(200).json({ message: "Loged In", user, token })
-
-    // try {
-    //     const existingUser = await User.findOne({ email });
-
-    //     if (!existingUser) {
-    //         return res.status(401).json({ message: "User not found" });
-    //     }
-
-    //     const matchPassword = await bcrypt.compare(password, existingUser.password);
-    //     if (!matchPassword) {
-    //         return res.status(400).json({ message: "Invalid password" });
-    //     }
-
-    //     const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, SecretKey);
-    //     res.status(200).json({ message: "Login successful", token });
-
-    // } catch (error) {
-    //     console.error("Error logging in user:", error);
-    //     res.status(500).json({ message: "Internal server error" });
-    // }
+    res.status(200).json({ message: "Loged In", user, token });
 }
 
 module.exports = { register, login };
