@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import style from './Todoboard.module.css'
 import CreateTodo from '../module/CreateTodo'
+import TaskCard from './Backlocks/TaskCard'
 
 function Todoboard() {
 
@@ -16,21 +17,26 @@ function Todoboard() {
 }
   return (
     <div className={style.body}>
-        <div className={style.Backlocks}>
-          <p>Backlocks</p>
+        <div className={style.container}>
+        <p>Backlocks</p>
+        <TaskCard priority={"HIGH"} />
+        <TaskCard priority={"HIGH"} />
           </div>
-        <div className={style.Todo}>
+        <div className={style.container}>
           <div className={style.TodoUp}>
           <p>Todo</p>
-          <span onClick={() => handelPopup()}><i class="bi bi-plus"></i></span>
+          <TaskCard priority={"LOW"} />
+          <span onClick={() => handelPopup()}><i className="bi bi-plus"></i></span>
           </div>
           <div></div>
           </div>
-        <div className={style.InProcess}>
-          <p>In Process</p>
+        <div className={style.container}>
+        <p>In Process</p>
+        <TaskCard priority={"LOW"} />
           </div>
-        <div className={style.Done}>
-          <p>Done</p>
+        <div className={style.container}>
+        <p>Done</p>
+        <TaskCard priority={"LOW"} />
           </div> 
 
           {click && (

@@ -1,5 +1,5 @@
 {
-  "name": "Taskmanager",
+  "name": "taskmanager",
   "private": true,
   "scripts": {
     "build": "turbo build",
