@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import styles from './TaskCard.module.css';
-import { IoIosArrowUp,IoIosArrowDown  } from "react-icons/io";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { BsThreeDots } from "react-icons/bs";
 import Chip from '../../Buttons/Chip';
 
-const TaskCard = () => {
+const TaskCard = ({priority}) => {
+    const [showModal, setShowModal] = useState(false);
+
+  const handleIconClick = () => {
+    setShowModal(!showModal);
+  };
+
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Listen to music', checked: false },
     { id: 2, title: 'Learn JavaScript', checked: false },
@@ -27,7 +34,19 @@ const TaskCard = () => {
   return (
     <>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Hero section </h2>
+        <div className={styles.head}>
+          <p className={styles.priority}><div style={{
+            width: "8px",
+            height: "8px",
+            borderRadius: "50%",
+            backgroundColor: priority === "HIGH" ? "red": "green",
+            marginRight: '6px', 
+             
+            
+          }}></div> {priority}PRIORITY</p>  <BsThreeDots className={styles.icon} onClick={handleIconClick} />
+</div>
+      <Modal showModal={showModal}  />
+        <h1 className={styles.title}>Hero section</h1>
         <div className={styles.header}>
           <h2 className={styles.heading}>Check list ({checkedItemCount}/{tasks.length})</h2>
           <button className={styles.dropdownButton} onClick={() => setShowList(!showList)}>
@@ -50,7 +69,15 @@ const TaskCard = () => {
           </div>
         )}
         <div className={styles.footer}>
-         <Chip/>
+          <Chip bgColor={"#CF3636"} text={"10 Feb"} textClr={"white"} />
+          <span style={{
+            display: "flex",
+            gap: "5px"
+          }}>
+            <Chip bgColor={"#EEECEC"} text={"Progress"} textClr={"black"}></Chip>
+            <Chip bgColor={"#EEECEC"} text={"To-Do"} textClr={"black"}></Chip>
+            <Chip bgColor={"#EEECEC"} text={"Done"} textClr={"black"}></Chip>
+          </span>
         </div>
       </div>
     </>
@@ -58,3 +85,24 @@ const TaskCard = () => {
 };
 
 export default TaskCard;
+
+
+
+const Modal = ({handleCloseModal, showModal}) => {
+  return (
+    <>
+      {showModal && (
+        <div className={styles.modalBackdrop} onClick={handleCloseModal}>
+          <div className={styles.modal}>
+            
+            <ul>
+              <li>Edit</li>
+              <li>Share</li>
+              <li>Delete</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}

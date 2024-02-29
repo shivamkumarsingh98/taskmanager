@@ -1,8 +1,11 @@
 import styles from './Chip.module.css';
-const Chip = () => {
+const Chip = ({bgColor,text,textClr}) => {
   return (
       <>
-           <span className={styles.chip}>10 Feb</span>
+          <span className={styles.chip}  style={{
+              backgroundColor: bgColor,
+              color: textClr
+          }}>{text }</span>
       </>
   )
 }

@@ -17,22 +17,26 @@ function Todoboard() {
 }
   return (
     <div className={style.body}>
-        <div className={style.Backlocks}>
+        <div className={style.container}>
         <p>Backlocks</p>
-        <TaskCard/>
+        <TaskCard priority={"HIGH"} />
+        <TaskCard priority={"HIGH"} />
           </div>
-        <div className={style.Todo}>
+        <div className={style.container}>
           <div className={style.TodoUp}>
           <p>Todo</p>
+          <TaskCard priority={"LOW"} />
           <span onClick={() => handelPopup()}><i className="bi bi-plus"></i></span>
           </div>
           <div></div>
           </div>
-        <div className={style.InProcess}>
-          <p>In Process</p>
+        <div className={style.container}>
+        <p>In Process</p>
+        <TaskCard priority={"LOW"} />
           </div>
-        <div className={style.Done}>
-          <p>Done</p>
+        <div className={style.container}>
+        <p>Done</p>
+        <TaskCard priority={"LOW"} />
           </div> 
 
           {click && (
