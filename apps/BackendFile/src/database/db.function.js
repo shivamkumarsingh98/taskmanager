@@ -1,5 +1,4 @@
 const User = require("../model/user.model");
-const ApiError = require("../utils/apiError.utils");
 
 class DB_Functions {
     async findOne(email) {
@@ -8,13 +7,8 @@ class DB_Functions {
     }
 
     async createUser(name, email, password) {
-        try {
-            const user = await User.create({ name, email, password });
-            return user;
-        }
-        catch (error) {
-            throw new ApiError(401, "Couldn't create user!", "Something went wrong while creating a user!")
-        }
+        const user = await User.create({ name, email, password });
+        return user;
     }
 }
 

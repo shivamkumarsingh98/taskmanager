@@ -2,15 +2,8 @@ const jwt = require('jsonwebtoken');
 
 class TokenServices {
     async generateToken(id) {
-        try {
-            const token = await jwt.sign({ id }, process.env.JWT_TOKEN_KEY)
-            return token;
-        } catch (error) {
-            return {
-                message: "Something went wrong while generating token!",
-                error: error
-            }
-        }
+        const token = await jwt.sign({ id }, process.env.JWT_TOKEN_KEY)
+        return token;
     }
 
     async verifyToken(token) {
