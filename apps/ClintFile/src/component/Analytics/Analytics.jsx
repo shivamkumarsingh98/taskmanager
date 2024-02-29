@@ -6,7 +6,7 @@ function Analytics() {
     return (
         <div className={style.body}>
             <div >
-                
+              <Navebar/>
             </div>
             <div className={style.mainsection}>
                 <div className={style.header}>

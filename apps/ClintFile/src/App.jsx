@@ -8,6 +8,7 @@ import { Navigate, Routes, Route } from "react-router-dom";
 import Dashbord from './component/dashboard/Dashbord'
 import Navebar from './component/navebar/Navebar'
 import Analytics from './component/Analytics/Analytics'
+import Setting from './component/Setting/Setting'
 
 function App() {
  
@@ -21,6 +22,7 @@ function App() {
     <Route path='Navebar' element={<Navebar/>}/>
     <Route path='Dashbord' element={<Dashbord/>}/>
     <Route path='Analytics' element={<Analytics/>}/>
+    <Route path='Setting' element={<Setting/>}/>
    </Routes>
     </>
   )

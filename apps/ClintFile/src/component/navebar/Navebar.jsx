@@ -11,7 +11,7 @@ function Navebar() {
                 <div className={style.navbtn}>
                 <p onClick={()=>{navigate('/Dashbord')}}><i class="bi bi-wallet"></i> Board</p>
                 <p onClick={()=>{navigate('/Analytics')}}><i class="bi bi-database"></i> Analytics</p>
-                <p><i class="bi bi-gear"></i> Settings</p>
+                <p onClick={()=>{navigate('/Setting')}}><i class="bi bi-gear"></i> Settings</p>
                 </div>
             </div>
             <div className={style.sectiontwo}>

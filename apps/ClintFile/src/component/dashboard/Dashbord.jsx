@@ -14,8 +14,9 @@ function Dashbord() {
     return () => clearInterval(intervalId); 
   }, []);
   return (
+    <div className={style.fullbody}>
     <div className={style.body}>
-   <Navebar />
+      <Navebar/>
       <div className={style.board}>
         <div className={style.boardTop}>
           <div className={style.lefttext}>
@@ -31,6 +32,7 @@ function Dashbord() {
         <Todoboard/>
         </div>
       </div>
+    </div>
     </div>
   )
 }
