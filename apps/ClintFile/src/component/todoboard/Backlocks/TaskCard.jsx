@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './TaskCard.module.css';
+import { IoIosArrowUp,IoIosArrowDown  } from "react-icons/io";
 
 const TaskCard = () => {
   const [tasks, setTasks] = useState([
@@ -8,6 +9,7 @@ const TaskCard = () => {
     { id: 3, title: 'Watch a movie', checked: false },
     { id: 4, title: 'Read emails', checked: false }
   ]);
+  const [showList, setShowList] = useState(false);
 
   const handleCheckboxChange = (taskId) => {
     const updatedTasks = tasks.map(task => {
@@ -24,19 +26,30 @@ const TaskCard = () => {
   return (
     <>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Check list ({checkedItemCount}/{tasks.length})</h2>
-        <div className={styles.checkboxContainer}>
-          {tasks.map(task => (
-            <div key={task.id} className={styles.checkboxGroup}>
-              <input
-                type="checkbox"
-                id={`checkbox${task.id}`}
-                checked={task.checked}
-                onChange={() => handleCheckboxChange(task.id)}
-              />
-              <label htmlFor={`checkbox${task.id}`}>{task.title}</label>
-            </div>
-          ))}
+        <h2 className={styles.heading}>Hero section </h2>
+        <div className={styles.header}>
+          <h2 className={styles.heading}>Check list ({checkedItemCount}/{tasks.length})</h2>
+          <button className={styles.dropdownButton} onClick={() => setShowList(!showList)}>
+            {showList ? <IoIosArrowDown /> : <IoIosArrowUp />}
+          </button>
+        </div>
+        {showList && (
+          <div className={styles.checkboxContainer}>
+            {tasks.map(task => (
+              <div key={task.id} onChange={() => handleCheckboxChange(task.id)} className={`${styles.checkboxGroup} ${task.checked ? styles.checked : ''}`}>
+                <input
+                  type="checkbox"
+                  id={`checkbox${task.id}`}
+                  checked={task.checked}
+                  
+                />
+                <label htmlFor={`checkbox${task.id}`}>{task.title}</label>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className={styles.footer}>
+          <span className={styles.chip}>10 Feb</span>
         </div>
       </div>
     </>
