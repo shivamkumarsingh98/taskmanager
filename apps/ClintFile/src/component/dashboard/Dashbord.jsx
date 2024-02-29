@@ -2,6 +2,7 @@ import React from 'react'
 import style from './Dashbord.module.css'
 import Navebar from '../navebar/Navebar'
 import Todoboard from '../todoboard/Todoboard'
+import Analytics from '../Analytics/Analytics'
 
 function Dashbord() {
   return (

@@ -5,9 +5,9 @@ import './App.css'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import { Navigate, Routes, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashbord from './component/dashboard/Dashbord'
 import Navebar from './component/navebar/Navebar'
+import Analytics from './component/Analytics/Analytics'
 
 function App() {
  
@@ -20,6 +20,7 @@ function App() {
     <Route path='LoginPage' element={<LoginPage/>}/>
     <Route path='Navebar' element={<Navebar/>}/>
     <Route path='Dashbord' element={<Dashbord/>}/>
+    <Route path='Analytics' element={<Analytics/>}/>
    </Routes>
     </>
   )
