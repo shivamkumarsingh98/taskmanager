@@ -13,8 +13,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 const userRoute = require("./router/user.route");
+const todoRoute = require("./router/todo.route");
+const velidate = require("./utils/velidation.utils");
+const { asyncHandler } = require('./utils/asyncHandler');
 
-app.use("/auth", userRoute)
+app.use("/auth", userRoute);
+app.use("/dashboard", asyncHandler(velidate), todoRoute);
 
 module.exports = { app }
 
