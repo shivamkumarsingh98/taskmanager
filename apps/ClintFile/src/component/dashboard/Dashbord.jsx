@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './Dashbord.module.css'
 import Navebar from '../navebar/Navebar'
 import Todoboard from '../todoboard/Todoboard'
+import Analytics from '../Analytics/Analytics'
 
 function Dashbord() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -13,8 +14,9 @@ function Dashbord() {
     return () => clearInterval(intervalId); 
   }, []);
   return (
+    <div className={style.fullbody}>
     <div className={style.body}>
-   <Navebar />
+      <Navebar/>
       <div className={style.board}>
         <div className={style.boardTop}>
           <div className={style.lefttext}>
@@ -30,6 +32,7 @@ function Dashbord() {
         <Todoboard/>
         </div>
       </div>
+    </div>
     </div>
   )
 }

@@ -14,40 +14,40 @@ function Todoboard() {
     console.log('ok')
     setClick('someQuize');
     setShow(true)
-}
+  }
   return (
     <div className={style.body}>
-        <div className={style.container}>
+      <div className={style.container}>
         <p>Backlocks</p>
         <TaskCard priority={"HIGH"} />
         <TaskCard priority={"HIGH"} />
-          </div>
-        <div className={style.container}>
-          <div className={style.TodoUp}>
+      </div>
+      <div className={style.container}>
+        <div className={style.TodoUp}>
           <p>Todo</p>
           <TaskCard priority={"LOW"} />
           <span onClick={() => handelPopup()}><i className="bi bi-plus"></i></span>
-          </div>
-          <div></div>
-          </div>
-        <div className={style.container}>
+        </div>
+        <div></div>
+      </div>
+      <div className={style.container}>
         <p>In Process</p>
         <TaskCard priority={"LOW"} />
-          </div>
-        <div className={style.container}>
+      </div>
+      <div className={style.container}>
         <p>Done</p>
-        {/* <TaskCard priority={"LOW"} /> */}
+        <TaskCard priority={"LOW"} />
           </div> 
 
-          {click && (
-                        <CreateTodo
-                            onOpen={show}
-                            onRequestClose={() => {
-                                console.log("helllo")
-                                setClick(null)
-                            }}
-                        />
-                    )}
+      {click && (
+        <CreateTodo
+          onOpen={show}
+          onRequestClose={() => {
+            console.log("helllo")
+            setClick(null)
+          }}
+        />
+      )}
     </div>
   )
 }
