@@ -5,7 +5,7 @@ import CreateTodo from '../module/CreateTodo'
 import TaskCard from './Backlocks/TaskCard'
 
 function Todoboard() {
-
+   const [showList, setShowList] = useState(false);
   const [todo, setTodo] = useState()
   const [show, setShow] = useState(false);
   const [click, setClick] = useState(null)
@@ -36,7 +36,7 @@ function Todoboard() {
           </div>
         <div className={style.container}>
         <p>Done</p>
-        <TaskCard priority={"LOW"} />
+        {/* <TaskCard priority={"LOW"} /> */}
           </div> 
 
           {click && (
