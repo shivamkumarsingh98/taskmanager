@@ -1,10 +1,11 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import style from './Todoboard.module.css'
 import CreateTodo from '../module/CreateTodo'
+import TaskCard from './Backlocks/TaskCard'
 
 function Todoboard() {
-
+   const [showList, setShowList] = useState(false);
   const [todo, setTodo] = useState()
   const [show, setShow] = useState(false);
   const [click, setClick] = useState(null)
@@ -13,35 +14,40 @@ function Todoboard() {
     console.log('ok')
     setClick('someQuize');
     setShow(true)
-}
+  }
   return (
     <div className={style.body}>
-        <div className={style.Backlocks}>
-          <p>Backlocks</p>
-          </div>
-        <div className={style.Todo}>
-          <div className={style.TodoUp}>
+      <div className={style.container}>
+        <p>Backlocks</p>
+        <TaskCard priority={"HIGH"} setShowList={setShowList} showList={showList} />
+        <TaskCard priority={"HIGH"} />
+      </div>
+      <div className={style.container}>
+        <div className={style.TodoUp}>
           <p>Todo</p>
-          <span onClick={() => handelPopup()}><i class="bi bi-plus"></i></span>
-          </div>
-          <div></div>
-          </div>
-        <div className={style.InProcess}>
-          <p>In Process</p>
-          </div>
-        <div className={style.Done}>
-          <p>Done</p>
+          <TaskCard priority={"LOW"} setShowList={setShowList} showList={showList} />
+          <span onClick={() => handelPopup()}><i className="bi bi-plus"></i></span>
+        </div>
+        <div></div>
+      </div>
+      <div className={style.container}>
+        <p>In Process</p>
+        <TaskCard priority={"LOW"}  setShowList={setShowList} showList={showList}/>
+      </div>
+      <div className={style.container}>
+        <p>Done</p>
+        <TaskCard priority={"LOW"} setShowList={setShowList} showList={showList} />
           </div> 
 
-          {click && (
-                        <CreateTodo
-                            onOpen={show}
-                            onRequestClose={() => {
-                                console.log("helllo")
-                                setClick(null)
-                            }}
-                        />
-                    )}
+      {click && (
+        <CreateTodo
+          onOpen={show}
+          onRequestClose={() => {
+            console.log("helllo")
+            setClick(null)
+          }}
+        />
+      )}
     </div>
   )
 }
