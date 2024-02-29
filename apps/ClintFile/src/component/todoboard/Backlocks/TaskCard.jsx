@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import styles from './TaskCard.module.css';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";

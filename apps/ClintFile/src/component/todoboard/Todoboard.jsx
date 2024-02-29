@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import style from './Todoboard.module.css'
 import CreateTodo from '../module/CreateTodo'
@@ -19,24 +19,24 @@ function Todoboard() {
     <div className={style.body}>
       <div className={style.container}>
         <p>Backlocks</p>
-        <TaskCard priority={"HIGH"} />
+        <TaskCard priority={"HIGH"} setShowList={setShowList} showList={showList} />
         <TaskCard priority={"HIGH"} />
       </div>
       <div className={style.container}>
         <div className={style.TodoUp}>
           <p>Todo</p>
-          <TaskCard priority={"LOW"} />
+          <TaskCard priority={"LOW"} setShowList={setShowList} showList={showList} />
           <span onClick={() => handelPopup()}><i className="bi bi-plus"></i></span>
         </div>
         <div></div>
       </div>
       <div className={style.container}>
         <p>In Process</p>
-        <TaskCard priority={"LOW"} />
+        <TaskCard priority={"LOW"}  setShowList={setShowList} showList={showList}/>
       </div>
       <div className={style.container}>
         <p>Done</p>
-        <TaskCard priority={"LOW"} />
+        <TaskCard priority={"LOW"} setShowList={setShowList} showList={showList} />
           </div> 
 
       {click && (

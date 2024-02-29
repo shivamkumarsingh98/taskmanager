@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react'
 import style from './Dashbord.module.css'
 import Navebar from '../navebar/Navebar'
 import Todoboard from '../todoboard/Todoboard'

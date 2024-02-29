@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styles from './Chip.module.css';
 const Chip = ({bgColor,text,textClr}) => {
   return (
