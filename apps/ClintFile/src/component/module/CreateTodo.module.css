@@ -1,0 +1,13 @@
+.box{
+    width: 700px;
+    height: 400px;
+    background-color: #ffffff;
+    margin: 7rem 1rem 1rem 12rem ;
+}
+.todoAddBox{
+    margin: 0.85rem;
+}
+.todoAddBox input{
+    width: 500px;
+    align-items: center;
+}
