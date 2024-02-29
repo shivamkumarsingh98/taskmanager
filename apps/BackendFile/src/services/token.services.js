@@ -7,15 +7,8 @@ class TokenServices {
     }
 
     async verifyToken(token) {
-        try {
-            const tokenData = await jwt.verify(token, process.env.JWT_TOKEN_KEY)
-        }
-        catch (error) {
-            return {
-                message: "Something went wrong while verifying token!",
-                error: error
-            }
-        }
+        const tokenData = await jwt.verify(token, process.env.JWT_TOKEN_KEY)
+        return tokenData;
     }
 }
 

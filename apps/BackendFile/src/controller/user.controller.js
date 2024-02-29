@@ -28,6 +28,14 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     const { email, password } = req.body;
+    const user = await User.login(email, password);
+    const token = await Token.generateToken(user.id);
+    const options = {
+        httpOnly: true,
+        secure: true,
+    };
+    res.cookie("cookies", token, options);
+    res.status(200).json({ message: "Loged In", user, token })
 
     // try {
     //     const existingUser = await User.findOne({ email });

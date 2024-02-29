@@ -9,6 +9,14 @@ class UserServices {
         const user = await this.DbFunctions.createUser(name, email, password);
         return user;
     }
+
+    async login(email, password) {
+        const user = await this.DbFunctions.findOne(email);
+        if (!user) throw new ApiError(404, "User not found", "User not found with this email!")
+        const checkPassword = await user.isPasswordCorrect(password);
+        if (!checkPassword) throw new ApiError(401, "Wrong Password!", "Check your password and try again later!");
+        return user;
+    }
 };
 
 module.exports = UserServices;

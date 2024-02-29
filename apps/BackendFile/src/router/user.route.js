@@ -10,7 +10,7 @@ route.use(express.urlencoded({ extended: true }));
 
 route.post("/register", asyncHandler(register));
 
-route.post("/login", login);
+route.post("/login", asyncHandler(login));
 
 
 module.exports = route
