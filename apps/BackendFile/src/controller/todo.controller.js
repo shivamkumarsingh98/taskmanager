@@ -6,8 +6,8 @@ const Todo = new TodoServices();
 const UserDb = new UserDbFunction();
 
 const getData = async (req, res) => {
-    const { ownerId } = req.body;
-    const todo = await Todo.getTodoData({ _id: ownerId });
+    const { ownerId, startDate } = req.body;
+    const todo = await Todo.getTodoData({ id: ownerId, startDate: startDate });
     if (!todo) throw new ApiError(401, "Unauthorized", "You are not authorized!");
 
     const InProcess = todo.filter(todo => todo.status === "inProcess");
@@ -15,10 +15,7 @@ const getData = async (req, res) => {
     const Backlogs = todo.filter(todo => todo.status === "backLocks");
     const Done = todo.filter(todo => todo.status === "done");
 
-    const High = todo.filter(todo => todo.priority === "High");
-    const Low = todo.filter(todo => todo.priority === "Low");
-    const Medium = todo.filter(todo => todo.priority === "Medium");
-    res.status(200).json({ todos: { InProcess, Todos, Backlogs, Done }, data: { InProcess: InProcess.length, Todos: Todos.length, Backlogs: Backlogs.length, Done: Done.length }, priority: { High: High.length, Low: Low.length, Medium: Medium.length } });
+    res.status(200).json({ todos: { InProcess, Todos, Backlogs, Done } });
 }
 
 const addTodo = async (req, res) => {
@@ -52,4 +49,10 @@ const todoShareLink = async (req, res) => {
     res.send(`${req.headers.host}/share/${todoId}`);
 }
 
-module.exports = { getData, addTodo, deleteTodo, updateTodo, todoShareLink };
+const getAnalytics = async (req, res) => {
+    const id = req.body.ownerId;
+    const result = await Todo.getAnalytics(id)
+    res.send(result)
+}
+
+module.exports = { getData, addTodo, deleteTodo, updateTodo, todoShareLink, getAnalytics };

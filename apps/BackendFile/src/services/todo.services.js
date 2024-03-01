@@ -5,11 +5,11 @@ const UserDb = new UserDbFunction();
 const TodoDb = new TodoDbFunction();
 
 class TodoServices {
-    getTodoData = async (id) => {
+    getTodoData = async ({ id, startDate }) => {
         const user = await UserDb.findOne({ id });
         if (!user) throw new ApiError(404, 'Unathorized!', 'token is not valid');
         const todo = user.todo;
-        const todoData = await TodoDb.getTodos(todo);
+        const todoData = await TodoDb.getTodos({ idArray: todo, startDate });
         return todoData;
     }
 
@@ -26,6 +26,15 @@ class TodoServices {
     updateTodo = async (todoData) => {
         const updatedTodo = await TodoDb.updateTodo(todoData);
         return updatedTodo;
+    }
+
+    getAnalytics = async (id) => {
+        const user = await UserDb.findOne({ id });
+        if (!user) throw new ApiError(404, 'Unathorized!', 'token is not valid');
+        const todo = user.todo;
+        if (todo.length === 0) return todo;
+        const result = await TodoDb.getAnalytics({ ownerId: id, todoId: todo })
+        return result;
     }
 }
 
