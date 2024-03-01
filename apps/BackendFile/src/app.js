@@ -16,9 +16,11 @@ const userRoute = require("./router/user.route");
 const todoRoute = require("./router/todo.route");
 const velidate = require("./utils/velidation.utils");
 const { asyncHandler } = require('./utils/asyncHandler');
+const shareRoute = require("./router/share.route")
 
 app.use("/auth", userRoute);
 app.use("/dashboard", asyncHandler(velidate), todoRoute);
+app.use("/share", shareRoute);
 
 module.exports = { app }
 
