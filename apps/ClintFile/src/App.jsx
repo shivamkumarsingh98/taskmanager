@@ -9,6 +9,8 @@ import Dashbord from './component/dashboard/Dashbord'
 import Navebar from './component/navebar/Navebar'
 import Analytics from './component/Analytics/Analytics'
 import Setting from './component/Setting/Setting'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
  
@@ -24,6 +26,7 @@ function App() {
     <Route path='Analytics' element={<Analytics/>}/>
     <Route path='Setting' element={<Setting/>}/>
    </Routes>
+   <ToastContainer/>
     </>
   )
 }

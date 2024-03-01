@@ -1,5 +1,6 @@
 const User = require("../model/user.model");
 const Todo = require("../model/todo.model");
+const mongoose = require("mongoose")
 
 class UserDbFunction {
     async findOne({ email, id }) {
@@ -14,22 +15,67 @@ class UserDbFunction {
 }
 
 class TodoDbFunction {
-    async getTodos(idArray) {
-        const todoData = await Todo.find({ _id: { $in: idArray } });
+    async getTodos({ idArray, startDate }) {
+        const query = {
+            createdAt: {
+                $gte: startDate,
+            },
+            _id: { $in: idArray }
+        }
+        const todoData = await Todo.find(query);
         return todoData;
     }
 
-    async addOrUpdate(todoData) {
+    async addTodo(todoData) {
         const { id, ...data } = todoData;
-        console.log(id)
-        const todo = id ? await Todo.findByIdAndUpdate(id, data, { new: true }) : await Todo.create(data);
-        return todo.id;
+        const todo = await Todo.create(data);
+        return todo;
+    }
+
+    async updateTodo(todoData) {
+        const { id, ...data } = todoData;
+        const updatedTodo = await Todo.findByIdAndUpdate(id, data, { new: true });
+        return updatedTodo;
     }
 
     async deleteTodo({ ownerId, id }) {
         const deletedTodo = await Todo.findOneAndDelete({ _id: id, owner: ownerId })
         return deletedTodo;
     }
+
+    async getAnalytics({ ownerId, todoId }) {
+        const ObjectId = mongoose.Types.ObjectId;
+        const statusBased = [
+            { $match: { owner: new ObjectId(ownerId), _id: { $in: todoId.map(id => new ObjectId(id)) } } },
+            {
+                $group: {
+                    _id: { status: "$status" },
+                    count: { $sum: 1 }
+                }
+            }
+        ];
+        const priorityBased = [
+            { $match: { owner: new ObjectId(ownerId), _id: { $in: todoId.map(id => new ObjectId(id)) } } },
+            {
+                $group: {
+                    _id: { priority: "$priority" },
+                    count: { $sum: 1 }
+                }
+            }
+        ];
+        try {
+            const statusData = await Todo.aggregate(statusBased);
+            const priorityData = await Todo.aggregate(priorityBased);
+            return { statusData, priorityData };
+        } catch (error) {
+            console.error("Error in getAnalytics:", error);
+            throw error;
+        }
+    }
+
+
+
+
 }
 
 module.exports = { UserDbFunction, TodoDbFunction };

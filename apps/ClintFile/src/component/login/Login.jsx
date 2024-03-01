@@ -3,6 +3,8 @@ import { useState } from 'react'
 import style from './Login.module.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import { login } from '../../Api/auth/auth'
+import {toast } from 'react-toastify';
 
 function Login() {
 
@@ -19,19 +21,17 @@ function Login() {
       [e.target.name]: e.target.value
     });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post('http://localhost:8080/api/login', formData);
-      console.log("Data saved to database", response.data);
-      setFormData(response.data);
-
-      navigate('/Dashbord')
-
+      await login(formData.email,formData.password); 
+      console.log(formData)
+      toast.success("Login successful!")
+      navigate('/Dashbord'); 
     } catch (error) {
-      console.error("Error:", error);
+      alert("login failed:", error);
     }
   };
 
