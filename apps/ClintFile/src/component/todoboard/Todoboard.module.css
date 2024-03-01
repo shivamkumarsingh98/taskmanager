@@ -3,6 +3,7 @@
   grid-template-columns: auto auto auto auto;
   justify-content: space-evenly;
   gap: 10px;
+  width: 82vw;
   overflow-x: scroll;
   border: 1px solid pink;
 }
