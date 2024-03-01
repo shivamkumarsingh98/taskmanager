@@ -5,7 +5,8 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 import Chip from '../../Buttons/Chip';
 
-const TaskCard = ({priority,setShowList,showList}) => {
+const TaskCard = ({ priority }) => {
+  const [showList, setShowList] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
   const handleIconClick = () => {
