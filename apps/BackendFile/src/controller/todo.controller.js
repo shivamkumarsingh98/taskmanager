@@ -47,4 +47,9 @@ const deleteTodo = async (req, res) => {
     res.status(200).json({ deletedTodo });
 }
 
-module.exports = { getData, addTodo, deleteTodo, updateTodo };
+const todoShareLink = async (req, res) => {
+    const todoId = req.query.todoId;
+    res.send(`${req.headers.host}/share/${todoId}`);
+}
+
+module.exports = { getData, addTodo, deleteTodo, updateTodo, todoShareLink };
