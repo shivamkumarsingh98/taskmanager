@@ -1,13 +1,140 @@
-.box{
-    width: 700px;
-    height: 400px;
-    background-color: #ffffff;
-    margin: 7rem 1rem 1rem 12rem ;
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(39, 39, 39, 0.2);
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+    
 }
-.todoAddBox{
-    margin: 0.85rem;
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
-.todoAddBox input{
-    width: 500px;
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.taskContainer {
+    margin-top: 20px;
+}
+
+.taskContainerSec {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskInputSec {
+    margin-bottom: 10px;
+}
+
+.taskInputSec label {
+    font-weight: bold;
+}
+
+.selectOpt {
+    display: flex;
+}
+
+.opt {
+    display: inline-block; 
+    margin-right: 10px; 
+    padding: 5px 10px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+.opt:hover {
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.red,
+.blue,
+.green {
+    width: 12px; 
+    height: 12px; 
+    margin-right: 5px; 
+    border-radius: 50%; 
+    display: inline-block;
+    vertical-align: middle; 
+}
+
+.selectText {
+    font-size: 14px; 
+    display: inline-block;
+    vertical-align: middle; 
+}
+.selectPriority{
+    display: flex;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+.selectText{
+    font-size: 10px;
+}
+.taskAddBox {
+    margin-top: 10px;
+    cursor: pointer;
+    display: flex;
     align-items: center;
+}
+
+.taskAddIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-image: url("path_to_your_add_icon.svg");
+    background-size: cover;
+}
+
+.buttonsRight {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancelBtn,
+.saveBtn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancelBtn {
+    background-color: #ccc;
+}
+
+.saveBtn {
+    background-color: #007bff;
+    color: white;
+}
+
+.disableBtn {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

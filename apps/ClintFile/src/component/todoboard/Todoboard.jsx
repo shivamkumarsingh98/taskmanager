@@ -1,50 +1,50 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import style from './Todoboard.module.css'
 import CreateTodo from '../module/CreateTodo'
 import TaskCard from './Backlocks/TaskCard'
 
 function Todoboard() {
-   const [showList, setShowList] = useState(false);
-  const [todo, setTodo] = useState()
-  const [show, setShow] = useState(false);
-  const [click, setClick] = useState(null)
+  
+  const [showModal, setShowModal] = useState(false);
+  const [click, setClick] = useState(null);
 
-  const handelPopup = (someQuize) => {
-    console.log('ok')
+  const handlePopup = () => {
     setClick('someQuize');
-    setShow(true)
+    setShowModal(true);
   }
+
   return (
     <div className={style.body}>
       <div className={style.container}>
-        <p>Backlocks</p>
-        <TaskCard priority={"HIGH"} setShowList={setShowList} showList={showList} />
+        <p>Backlogs</p>
+        <TaskCard priority={"HIGH"} />
         <TaskCard priority={"HIGH"} />
       </div>
       <div className={style.container}>
         <div className={style.TodoUp}>
           <p>Todo</p>
-          <TaskCard priority={"LOW"} setShowList={setShowList} showList={showList} />
-          <span onClick={() => handelPopup()}><i className="bi bi-plus"></i></span>
+          <TaskCard priority={"LOW"} />
+          <span onClick={handlePopup} style={{
+            cursor: "pointer"
+          }}><i className="bi bi-plus" ></i></span>
         </div>
         <div></div>
       </div>
       <div className={style.container}>
         <p>In Process</p>
-        <TaskCard priority={"LOW"}  setShowList={setShowList} showList={showList}/>
+        <TaskCard priority={"LOW"} />
       </div>
       <div className={style.container}>
         <p>Done</p>
-        <TaskCard priority={"LOW"} setShowList={setShowList} showList={showList} />
-          </div> 
+        <TaskCard priority={"LOW"} />
+      </div>
 
       {click && (
         <CreateTodo
-          onOpen={show}
+          isOpen={showModal}
           onRequestClose={() => {
-            console.log("helllo")
-            setClick(null)
+            setClick(null);
+            setShowModal(false);
           }}
         />
       )}
@@ -52,4 +52,4 @@ function Todoboard() {
   )
 }
 
-export default Todoboard
+export default Todoboard;
