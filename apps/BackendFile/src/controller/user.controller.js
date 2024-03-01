@@ -37,4 +37,17 @@ const login = async (req, res) => {
     res.status(200).json({ message: "Loged In", user, token });
 }
 
-module.exports = { register, login };
+const updatePassword = async (req, res) => {
+    const { email, oldPassword, newPassword } = req.body;
+    const user = await User.updatePassword({ email, oldPassword, newPassword });
+    const token = await Token.generateToken(user.id);
+    user.password = null;
+    const options = {
+        httpOnly: true,
+        secure: true,
+    };
+    res.cookie("cookies", token, options);
+    res.status(200).json({ message: "Password updated successfully", user, token });
+}
+
+module.exports = { register, login, updatePassword };

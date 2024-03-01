@@ -17,10 +17,19 @@ class UserServices {
         if (!checkPassword) throw new ApiError(401, "Wrong Password!", "Check your password and try again later!");
         return user;
     }
+
+    async updatePassword({ email, oldPassword, newPassword }) {
+        const user = await this.UserDb.findOne({ email });
+        if (!user) throw new ApiError(404, "User not found", "User not found with this email!")
+        const checkPassword = await user.isPasswordCorrect(oldPassword);
+        if (!checkPassword) {
+            throw new ApiError(401, "Wrong Password!", "Check your password and try again later!");
+        } else {
+            user.password = newPassword;
+            await user.save({ validateBeforeSave: false });
+            return user;
+        }
+    }
 };
-
-class TodoServices {
-
-}
 
 module.exports = UserServices;

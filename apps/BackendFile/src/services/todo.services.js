@@ -13,14 +13,19 @@ class TodoServices {
         return todoData;
     }
 
-    addOrUpdate = async (todoData) => {
-        const todoId = await TodoDb.addOrUpdate(todoData);
+    addTodo = async (todoData) => {
+        const todoId = await TodoDb.addTodo(todoData);
         return todoId;
     }
 
     deleteDoto = async ({ ownerId, id }) => {
         const deletedTodo = await TodoDb.deleteTodo({ ownerId, id });
         return deletedTodo;
+    }
+
+    updateTodo = async (todoData) => {
+        const updatedTodo = await TodoDb.updateTodo(todoData);
+        return updatedTodo;
     }
 }
 
