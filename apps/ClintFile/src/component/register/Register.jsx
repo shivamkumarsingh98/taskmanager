@@ -1,14 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import style from './Register.module.css'
-import axios from 'axios'
 import { useNavigate } from 'react-router'
+import axios from 'axios'
 import { register } from '../../Api/auth/auth'
 import { toast } from 'react-toastify';
 
 function Register() {
-
-  let navigate = useNavigate()
+let navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,7 +32,7 @@ function Register() {
     }
     try {
       await register(formData.name, formData.email, formData.password, formData.confirmPassword);
-
+      navigate('/Dashbord')
     } catch (error) {
       console.log("Registration failed:", error);
       return
@@ -52,11 +51,45 @@ function Register() {
           Register
         </div>
         <form method='post' onSubmit={handleSubmit}>
-          <input type='text' placeholder='Name' name='name' value={formData.name} onChange={handleChange} required /><br />
-          <input type='text' placeholder='Email' name='email' value={formData.email} onChange={handleChange} className={style.inputbox} required /><br />
-          <input type='password' placeholder='Password' name='password' value={formData.password} onChange={handleChange} className={style.inputbox} required /><br />
-          <input type='password' placeholder='Confirm Password' name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} required /><br />
-          <button type='submit' className={style.btn} >Register</button>
+          <input 
+          type='text' 
+          placeholder='Name' 
+          name='name' 
+          value={formData.name} 
+          onChange={handleChange} 
+          required 
+          /><br />
+          <input 
+          type='text' 
+          placeholder='Email' 
+          name='email' 
+          value={formData.email} 
+          onChange={handleChange} 
+          className={style.inputbox} 
+          required 
+          /><br />
+          <input 
+          type='password' 
+          placeholder='Password' 
+          name='password' 
+          value={formData.password} 
+          onChange={handleChange} 
+          className={style.inputbox} 
+          required 
+          /><br />
+          <input 
+          type='password' 
+          placeholder='Confirm Password' 
+          name='confirmPassword' 
+          value={formData.confirmPassword} 
+          onChange={handleChange} 
+          required 
+          /><br />
+          <button 
+          type='submit' 
+          className={style.btn} >
+            Register
+            </button>
         </form>
         <p>Already have an account?</p>
         <button className={style.loginbtn} onClick={() => { navigate('/LoginPage') }}>Login</button>

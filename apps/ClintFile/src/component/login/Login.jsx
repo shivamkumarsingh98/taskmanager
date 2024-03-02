@@ -28,11 +28,10 @@ function Login() {
     try {
       await login(formData.email,formData.password); 
       console.log(formData)
-      toast.success("Login successful!")
-      navigate('/Dashbord'); 
     } catch (error) {
       alert("login failed:", error);
     }
+    navigate('/Dashbord')
   };
 
   return (

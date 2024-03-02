@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import style from './CreateTodo.module.css';
+import {createTodo} from '../../Api/todo/todo'
 
 const CreateTodo = (props) => {
+    const [data , setData] = useState({
+        title:"" ,
+        checkList:"", 
+        dueDate:"", 
+        priority:"", 
+        status:""
+    })
     const [checklistItems, setChecklistItems] = useState([]);
 
     const addChecklistItem = () => {
@@ -13,6 +21,28 @@ const CreateTodo = (props) => {
         const updatedChecklistItems = [...checklistItems];
         updatedChecklistItems[index] = value;
         setChecklistItems(updatedChecklistItems);
+    };
+
+    const handleTitleChange = (e) => {
+        setData({ ...data, title: e.target.value });
+    };
+
+    const handlePriorityChange = (priority) => {
+        setData({ ...data, priority });
+    };
+
+    const handleDueDateChange = (e) => {
+        setData({ ...data, dueDate: e.target.value });
+    };
+
+    const fetchData = async () => {
+        try {
+            const response = await createTodo(data);
+            console.log(response.data);
+            props.onRequestClose(); 
+        } catch (error) {
+            console.error('Error creating todo:', error);
+        }
     };
 
     return (
@@ -29,22 +59,37 @@ const CreateTodo = (props) => {
                             <div className={style.taskSecUp}>
                                 <div className={style.taskInputSec}>
                                     <label>Title <span className={style.redDot}>*</span></label>
-                                    <input className={style.input} type='text' placeholder='Enter Task Title' />
+                                    <input
+                                        className={style.input}
+                                        type='text'
+                                        placeholder='Enter Task Title'
+                                        value={data.title}
+                                        onChange={handleTitleChange}
+                                    />
                                 </div>
                                 <div className={style.selectPriority}>
                                     <div className={style.taskTitle}>
                                         <span>Select Priority <span className={style.redDot}>*</span></span>
                                     </div>
                                     <div className={style.selectOpt}>
-                                        <div className={`${style.opt} ${style.false}`}>
+                                        <div
+                                            className={`${style.opt} ${data.priority === 'HIGH' ? style.true : style.false}`}
+                                            onClick={() => handlePriorityChange('HIGH')}
+                                        >
                                             <span className={style.red}></span>
                                             <span className={style.selectText}>HIGH PRIORITY</span>
                                         </div>
-                                        <div className={`${style.opt} ${style.false}`}>
+                                        <div
+                                            className={`${style.opt} ${data.priority === 'MODERATE' ? style.true : style.false}`}
+                                            onClick={() => handlePriorityChange('MODERATE')}
+                                        >
                                             <span className={style.blue}></span>
                                             <span className={style.selectText}>MODERATE PRIORITY</span>
                                         </div>
-                                        <div className={`${style.opt} ${style.false}`}>
+                                        <div
+                                            className={`${style.opt} ${data.priority === 'LOW' ? style.true : style.false}`}
+                                            onClick={() => handlePriorityChange('LOW')}
+                                        >
                                             <span className={style.green}></span>
                                             <span className={style.selectText}>LOW PRIORITY</span>
                                         </div>
@@ -76,17 +121,22 @@ const CreateTodo = (props) => {
                     </section>
                     <section className={style.taskSecDown}>
                         <div>
-                            <input className={style.dateBtn} type='date' />
+                            <input
+                                className={style.dateBtn}
+                                type='date'
+                                value={data.dueDate}
+                                onChange={handleDueDateChange}
+                            />
                         </div>
                         <div className={style.buttonsRight}>
                             <button className={style.cancelBtn} onClick={props.onRequestClose}>Cancel</button>
-                            <button disabled className={`${style.saveBtn} ${style.disableBtn}`}>Save</button>
+                            <button className={`${style.saveBtn}`} onClick={fetchData}>Save</button>
                         </div>
                     </section>
                 </div>
             </Modal>
         </div>
     );
-}
+};
 
 export default CreateTodo;

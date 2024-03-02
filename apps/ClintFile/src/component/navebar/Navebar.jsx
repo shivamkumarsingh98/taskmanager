@@ -1,8 +1,17 @@
 import style from './Navebar.module.css'
 import { useNavigate } from 'react-router'
+import { AuthProvider } from '../../Context/AuthProvider'
 
 function Navebar() {
     let navigate = useNavigate()
+    const { logout } = useAuth();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        logout();
+        navigate('/LoginPage');
+    };
+
     return (
         <div className={style.body}>
             <div className={style.sectionone}>
@@ -14,7 +23,7 @@ function Navebar() {
                 </div>
             </div>
             <div className={style.sectiontwo}>
-                <p><i className="bi bi-box-arrow-right"></i> Log out</p>
+                <p onClick={handleLogout}><i className="bi bi-box-arrow-right"></i> Log out</p>
             </div>
         </div>
     )
