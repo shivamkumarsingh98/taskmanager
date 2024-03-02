@@ -14,9 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from './Context/AuthProvider';
 import ProtectedRoute from './Context/ProtectedRoute';
 
-
-
-
 function App() {
   return (
     <AuthProvider>
@@ -25,31 +22,12 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
         
-        {/* Private Routes */}
-        <Route
-          element={
-            <ProtectedRoute >
-              <Dashbord/>
-            </ProtectedRoute >
-          }
-        />
-        <Route
-          element={
-            <ProtectedRoute element={<Navebar />} />
-          }
-        />
-        <Route
-          element={
-            <ProtectedRoute element={<Analytics />} />
-          }
-        />
-        <Route
-          element={
-            <ProtectedRoute element={<Setting />} />
-          }
-        />
+       
+        <Route path="/Dashboard" element={<ProtectedRoute><Dashbord/></ProtectedRoute>} />
+        <Route path="/Navebar" element={<ProtectedRoute><Navebar/></ProtectedRoute>} />
+        <Route path="/Analytics" element={<ProtectedRoute><Analytics/></ProtectedRoute>} />
+        <Route path="/Setting" element={<ProtectedRoute><Setting/></ProtectedRoute>} />
         
-        {/* Default Redirect for unknown paths */}
         <Route path="/*" element={<Navigate to="/Register" />} />
       </Routes>
     </AuthProvider>

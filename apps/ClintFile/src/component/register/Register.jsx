@@ -32,7 +32,7 @@ let navigate = useNavigate()
     }
     try {
       await register(formData.name, formData.email, formData.password, formData.confirmPassword);
-      navigate('/Dashbord')
+      navigate('/Dashboard')
     } catch (error) {
       console.log("Registration failed:", error);
       return
@@ -92,7 +92,7 @@ let navigate = useNavigate()
             </button>
         </form>
         <p>Already have an account?</p>
-        <button className={style.loginbtn} onClick={() => { navigate('/LoginPage') }}>Login</button>
+        <button className={style.loginbtn} onClick={() => { navigate('/Login') }}>Login</button>
       </div>
     </div>
   );

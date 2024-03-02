@@ -1,15 +1,15 @@
 import style from './Navebar.module.css'
 import { useNavigate } from 'react-router'
-import { AuthProvider } from '../../Context/AuthProvider'
+import { AuthContext } from '../../Context/AuthProvider'
+import { useContext } from 'react';
 
 function Navebar() {
     let navigate = useNavigate()
-    const { logout } = useAuth();
+    const { logout } = useContext(AuthContext);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
         logout();
-        navigate('/LoginPage');
+        navigate('/Login');
     };
 
     return (
@@ -17,7 +17,7 @@ function Navebar() {
             <div className={style.sectionone}>
                 <p className={style.heading}>Pro Manage</p>
                 <div className={style.navbtn}>
-                <p onClick={()=>{navigate('/Dashbord')}}><i className="bi bi-wallet"></i> Board</p>
+                <p onClick={()=>{navigate('/Dashboard')}}><i className="bi bi-wallet"></i> Board</p>
                 <p onClick={()=>{navigate('/Analytics')}}><i className="bi bi-database"></i> Analytics</p>
                 <p onClick={()=>{navigate('/Setting')}}><i className="bi bi-gear"></i> Settings</p>
                 </div>
