@@ -31,7 +31,7 @@ function Login() {
     } catch (error) {
       alert("login failed:", error);
     }
-    navigate('/Dashbord')
+    navigate('/Dashboard')
   };
 
   return (

@@ -1,10 +1,11 @@
 import style from './Navebar.module.css'
 import { useNavigate } from 'react-router'
-import { AuthProvider } from '../../Context/AuthProvider'
+import { AuthContext } from '../../Context/AuthProvider'
+import { useContext } from 'react';
 
 function Navebar() {
     let navigate = useNavigate()
-    const { logout } = useAuth();
+    const { logout } = useContext(AuthContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
