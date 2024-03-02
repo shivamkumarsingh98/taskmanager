@@ -28,10 +28,10 @@ function Login() {
     try {
       await login(formData.email,formData.password); 
       console.log(formData)
+      navigate('/Dashboard')
     } catch (error) {
       alert("login failed:", error);
     }
-    navigate('/Dashboard')
   };
 
   return (

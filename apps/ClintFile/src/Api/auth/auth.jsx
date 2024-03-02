@@ -3,8 +3,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router'
 const backendBaseUrl = "http://localhost:8080"
 
-
-
 export const register = async (name, email, password, confirmPassword) => {
     try {
         const reqPayload = { name, email, password, confirmPassword };
@@ -30,10 +28,11 @@ export const login = async (email, password) => {
         const reqPayload = { email, password };
         const reqUrl = `${backendBaseUrl}/auth/login`;
         const response = await axios.post(reqUrl, reqPayload);
-        toast.success("Login successful!")
         console.log("token",response.data.token)
         localStorage.setItem("token", response.data.token);
+        toast.success("Login successful!")
     } catch (error) {
         console.log("login error", error.message);
     }
 };
+
