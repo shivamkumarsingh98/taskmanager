@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import { MdDelete } from 'react-icons/md'; // Importing delete icon from React Icons
 import style from './CreateTodo.module.css';
 import {createTodo} from '../../Api/todo/todo'
 
@@ -15,6 +16,12 @@ const CreateTodo = (props) => {
 
     const addChecklistItem = () => {
         setChecklistItems([...checklistItems, '']);
+    };
+
+    const removeChecklistItem = (index) => {
+        const updatedChecklistItems = [...checklistItems];
+        updatedChecklistItems.splice(index, 1);
+        setChecklistItems(updatedChecklistItems);
     };
 
     const handleChecklistChange = (index, value) => {
@@ -97,18 +104,20 @@ const CreateTodo = (props) => {
                                 </div>
                                 <div>
                                     <div>
-                                        <span className={style.checklistTitle}>Checklist ({checklistItems.length}/0) <span className={style.redDot}>*</span></span>
+                                        <span className={style.checklistTitle}>Checklist (0/{checklistItems.length}) <span className={style.redDot}>*</span></span>
                                     </div>
                                     <div className={style.taskInputs}>
                                         {checklistItems.map((item, index) => (
-                                            <input
-                                                key={index}
-                                                className={style.input}
-                                                type='text'
-                                                placeholder={`Checklist Item ${index + 1}`}
-                                                value={item}
-                                                onChange={(e) => handleChecklistChange(index, e.target.value)}
-                                            />
+                                            <div key={index} className={style.inputWrapper}>
+                                                <input
+                                                    className={style.input}
+                                                    type='text'
+                                                    placeholder={`Checklist Item ${index + 1}`}
+                                                    value={item}
+                                                    onChange={(e) => handleChecklistChange(index, e.target.value)}
+                                                />
+                                                <MdDelete className={style.deleteIcon} onClick={() => removeChecklistItem(index)} />
+                                            </div>
                                         ))}
                                     </div>
                                     <div className={style.taskAddBox} onClick={addChecklistItem}>
